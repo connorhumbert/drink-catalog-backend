@@ -41,7 +41,7 @@ recordRoutes.route("/record/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
    name: req.body.name,
-   ingredients: req.body.ingredients.split(','),
+   ingredients: req.body.ingredients.split(',').map(element => element.trim()),
    booze: req.body.booze,
  };
  db_connect.collection("records").insertOne(myobj, function (err, res) {
@@ -57,7 +57,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
  let newvalues = {
    $set: {
      name: req.body.name,
-     ingredients: req.body.ingredients.split(','),
+     ingredients: req.body.ingredients.split(',').map(element => element.trim()),
      booze: req.body.booze,
    },
  };
