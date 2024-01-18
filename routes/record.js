@@ -12,7 +12,8 @@ recordRoutes.route("/record").get(function (req, res) {
   let db_connect = dbo.getDb("employees");
   db_connect
     .collection("records")
-    .find({  }) // Sort by the 'name' field in ascending order
+    .find({})
+    .sort({ name: 1 })
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
